@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 (async () => {
   const addScript = (to, src, attrs = {}) => {
-    return new Promise((resolve, reject) => {
+    const guard = `at_${src}_promise`;
+    if (window[guard]) return window[guard];
+    return window[guard] = new Promise((resolve, reject) => {
       const script = document.createElement('script');
       script.src = src;
       Object.keys(attrs).forEach(key => script.setAttribute(key, attrs[key]));
@@ -13,7 +15,7 @@
 
   const shared = ['runtime', 'vendor', 'common', 'protobuf'];
   const script = document.currentScript;
-  const parent = script.parentNode;
+  const parent = document.documentElement; // script.parentNode;
   const attribs = {};
   for (let i = 0; i < script.attributes.length; ++i) {
     const attrib = script.attributes[i];
@@ -21,6 +23,6 @@
   }
   Object.keys(attribs).forEach(attrib => script.removeAttribute(attrib));
 
-  await Promise.all(shared.map(bundle => addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@0.9.9-pre/tubepay/'}${bundle}${'.bundle.js'}`)));
-  await addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@0.9.9-pre/tubepay/'}${'client'}${'.bundle.js'}`, attribs);
+  await Promise.all(shared.map(bundle => addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@0.9.9-pre2/tubepay/'}${bundle}${'.bundle.js'}`)));
+  await addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@0.9.9-pre2/tubepay/'}${'client'}${'.bundle.js'}`, attribs);
 })();
