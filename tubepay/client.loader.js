@@ -23,8 +23,8 @@
     }
     Object.keys(attribs).forEach(attrib => script.removeAttribute(attrib));
 
-    await Promise.all(shared.map(bundle => addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@1.0.7-tube4/tubepay/'}${bundle}${'.bundle.js'}`)));
-    await addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@1.0.7-tube4/tubepay/'}${'client'}${'.bundle.js'}`, attribs);
+    await Promise.all(shared.map(bundle => addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@1.0.8-tube4/tubepay/'}${bundle}${'.bundle.js'}`)));
+    await addScript(parent, `${'https://cdn.jsdelivr.net/gh/ipbc-dev/airtime-module-dist@1.0.8-tube4/tubepay/'}${'client'}${'.bundle.js'}`, attribs);
 
     document.dispatchEvent(new CustomEvent(`${'client'}-loaded`));
   } catch (err) {
